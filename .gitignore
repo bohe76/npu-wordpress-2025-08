@@ -1,0 +1,31 @@
+# Git이 추적하지 않을 파일 및 폴더 목록
+
+# WordPress 핵심 파일
+# 이 파일들은 Git으로 관리하지 않고, Dockerfile이나 압축 파일로 배포됩니다.
+# https://github.com/github/gitignore/blob/main/WordPress.gitignore 참고
+
+*.log
+*.sql
+*.zip
+*.tar.gz
+*.DS_Store
+
+/wp-admin/
+/wp-includes/
+
+# 기본 테마 및 플러그인 폴더
+# 테마와 플러그인은 별도로 관리합니다.
+/wp-content/plugins/
+/wp-content/themes/
+
+# 업로드 파일
+/wp-content/uploads/
+
+# 설정 파일
+wp-config.php
+
+# WordPress 개발 관련
+/vendor
+/node_modules
+.env
+.DS_Store
