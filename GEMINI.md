@@ -74,3 +74,20 @@
 *   이 CLI는 `wordpress/` 디렉토리 내에서만 실행되어야 합니다.
 *   메인 CLI가 WordPress 코드 변경사항을 생성하면, 이 CLI를
   통해 해당 변경사항을 Git에 반영해야 합니다.
+*   **코드 수정 후 사용자 명시적 검증 및 커밋 메시지 제안 지시 전까지는 커밋 메시지 제안 및 커밋 진행하지 않음.**
+
+## 6. SEO 및 보안 고려사항 (SEO & Security Considerations)
+
+### 6.1. 검색 엔진 최적화 (SEO)
+너는 WordPress를 활용하여 SEO 친화적인 콘텐츠를 효율적으로 생성하고 관리하는 역할을 수행한다.
+*   **콘텐츠 전략:**
+    *   FAQ, 커뮤니티 게시글 등 다양한 형태의 콘텐츠를 WordPress의 포스트, 페이지, 커스텀 포스트 타입 기능을 활용하여 관리한다.
+    *   ACF (Advanced Custom Fields)를 사용하여 SEO 관련 커스텀 필드(예: SEO 제목, 메타 설명, 키워드)를 추가하고 관리한다.
+    *   WPGraphQL 및 WPGraphQL for Advanced Custom Fields를 통해 WordPress의 모든 콘텐츠와 커스텀 필드를 Next.js에서 GraphQL 쿼리로 쉽게 가져올 수 있도록 한다.
+*   **온페이지 SEO 지원:** WordPress 기반의 온페이지 SEO를 지원한다.
+
+### 6.2. 보안 (Security)
+헤드리스 CMS로서 WordPress의 보안을 강화하고 데이터 노출을 방지하는 역할을 수행한다.
+*   **프론트엔드 렌더링 비활성화:** WordPress가 자체적으로 페이지를 렌더링하는 것을 막고, 모든 프론트엔드 요청을 Next.js 사이트로 리디렉션하거나 특정 메시지를 표시하도록 설정한다.
+*   **GraphQL API 접근 제어:** 데이터의 민감도에 따라 WPGraphQL의 인증/권한 부여 기능을 사용하여 API 접근을 제한한다.
+*   **관리자 페이지 보안 강화:** 강력한 비밀번호, 정기적인 업데이트, 보안 플러그인 사용 등 기본적인 WordPress 보안 수칙을 준수한다.
