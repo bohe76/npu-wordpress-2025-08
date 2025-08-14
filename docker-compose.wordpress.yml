@@ -1,0 +1,30 @@
+services:
+  wordpress:
+    image: wordpress:latest
+    container_name: ${PROJECT_NAME}_wordpress
+    restart: always
+    env_file:
+      - ../.env # Adjusted path
+    ports:
+      - "${WORDPRESS_PORT}:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+    volumes:
+      - .:/var/www/html # Adjusted path
+    depends_on:
+      - db
+    networks:
+      - npu_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '512M'

@@ -29,3 +29,16 @@ wp-config.php
 /node_modules
 .env
 .DS_Store
+
+# 추가 WordPress 관련 무시 항목
+.htaccess
+wp-content/cache/
+wp-content/upgrade/
+wp-content/languages/
+
+# /wp-content/themes/ 전체를 무시하는 경우, 개발 중인 커스텀 테마는 추적하도록 예외 처리
+!wp-content/themes/underscore-npu/
+
+# IDE 관련 무시 항목
+.idea/
+.vscode/
