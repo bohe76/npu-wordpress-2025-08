@@ -42,3 +42,6 @@ wp-content/languages/
 # IDE 관련 무시 항목
 .idea/
 .vscode/
+
+# Gemini CLI specific
+commit_message.txt
