@@ -1,6 +1,6 @@
 services:
   wordpress:
-    image: wordpress:latest
+    build: .
     container_name: ${PROJECT_NAME}_wordpress
     restart: always
     env_file:
@@ -14,6 +14,8 @@ services:
       WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
     volumes:
       - .:/var/www/html # Adjusted path
+      - ./config/apache-custom.conf:/etc/apache2/conf-enabled/apache-custom.conf
+      - ./config/000-default.conf:/etc/apache2/sites-available/000-default.conf
     depends_on:
       - db
     networks:
