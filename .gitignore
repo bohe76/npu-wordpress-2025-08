@@ -16,7 +16,7 @@
 # 기본 테마 및 플러그인 폴더
 # 테마와 플러그인은 별도로 관리합니다.
 /wp-content/plugins/
-/wp-content/themes/
+/wp-content/themes/*
 
 # 업로드 파일
 /wp-content/uploads/
@@ -37,7 +37,8 @@ wp-content/upgrade/
 wp-content/languages/
 
 # /wp-content/themes/ 전체를 무시하는 경우, 개발 중인 커스텀 테마는 추적하도록 예외 처리
-!wp-content/themes/underscore-npu/
+!wp-content/themes/underscore-npu
+!wp-content/themes/underscore-npu/**
 
 # IDE 관련 무시 항목
 .idea/
