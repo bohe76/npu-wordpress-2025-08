@@ -217,3 +217,33 @@ function npu_register_post_types() {
     );
 }
 add_action('init', 'npu_register_post_types');
+
+/**
+ * Next.js On-Demand Revalidation을 트리거합니다.
+ */
+function trigger_nextjs_revalidation($post_id, $post) {
+    if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || is_int( wp_is_post_revision( $post_id ) ) || 'publish' !== $post->post_status ) {
+        return;
+    }
+    $secret = getenv('REVALIDATION_TOKEN');
+    if ( empty($secret) ) {
+        error_log('Error: REVALIDATION_TOKEN is not set.');
+        return;
+    }
+    $path = wp_parse_url( get_permalink($post_id), PHP_URL_PATH );
+    if ( empty($path) ) {
+        error_log('Error: Could not get post permalink path.');
+        return;
+    }
+    $revalidate_url = 'http://nextjs:3000/api/revalidate?path=' . $path . '&secret=' . $secret;
+    $response = wp_remote_get($revalidate_url);
+    if ( is_wp_error($response) ) {
+        error_log('Revalidation failed: ' . $response->get_error_message());
+    }
+    else {
+        $response_code = wp_remote_retrieve_response_code($response);
+        $response_body = wp_remote_retrieve_body($response);
+        error_log('Revalidation triggered for path ' . $path . '. Status: ' . $response_code . '. Body: ' . $response_body);
+    }
+}
+add_action('save_post', 'trigger_nextjs_revalidation', 10, 2);
